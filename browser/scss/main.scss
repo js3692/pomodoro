@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+@import 'mixins/main';
+
+body {
+  background: #fdfdfd;
+}
+
+#main {
+  padding-top: 60px;
+  margin: 0 auto;
+}
+
+@import 'directives/main';
+@import 'home/main';
+@import 'about/main';
+@import 'login/main';

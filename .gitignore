@@ -1,0 +1,18 @@
+# Gulped files
+/public/*
+
+# Except assets and utilities
+!/public/assets
+!/public/utils
+
+# Node
+node_modules
+npm-debug.log
+
+# Bower
+bower_components
+
+# Miscellaneous
+.idea
+.DS_Store
+coverage%
