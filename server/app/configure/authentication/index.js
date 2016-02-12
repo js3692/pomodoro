@@ -34,7 +34,12 @@ module.exports = function (app) {
 
   // Routing for browser AJAX requests ==========
   app.get('/session', function (req, res) {
-    if (req.user) res.send({ user: req.user.sanitize() });
+    if (req.user) {
+      User.findById(req.user._id).populate('inbox')
+        .then(function (foundUser) {
+          res.send({ user: foundUser.sanitize() });
+        });
+    }
     else res.status(401).send('No authenticated user.');
   });
 
