@@ -9,7 +9,7 @@ require('../../../server/db/models');
 
 var Inbox = mongoose.model('Inbox');
 
-describe('Inbox model', function () {
+describe('Inbox model:', function () {
 
   beforeEach('Establish DB connection', function (done) {
     if (mongoose.connection.db) return done();
@@ -24,8 +24,8 @@ describe('Inbox model', function () {
     expect(Inbox).to.be.a('function');
   });
 
-  describe('', function () {
-
+  describe('Basic operations ==>', function () {
+    
   });
 
 });

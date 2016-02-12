@@ -9,7 +9,7 @@ require('../../../server/db/models');
 
 var Task = mongoose.model('Task');
 
-describe('Task model', function () {
+describe('Task model:', function () {
 
   beforeEach('Establish DB connection', function (done) {
     if (mongoose.connection.db) return done();
@@ -24,8 +24,8 @@ describe('Task model', function () {
     expect(Task).to.be.a('function');
   });
 
-  describe('', function () {
-
+  describe('Basic operations ==>', function () {
+    
   });
 
 });

@@ -10,7 +10,7 @@ require('../../../server/db/models');
 
 var User = mongoose.model('User');
 
-describe('User model', function () {
+describe('User model:', function () {
 
     beforeEach('Establish DB connection', function (done) {
       if (mongoose.connection.db) return done();
