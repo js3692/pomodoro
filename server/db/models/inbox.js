@@ -8,16 +8,9 @@ var schema = new mongoose.Schema({
     default: "My Inbox"
   },
   created: {
-    type: Date
-  },
-  owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    type: Date,
+    default: new Date()
   }
-});
-
-schema.pre('save', function () {
-  if(!this.created) this.created = new Date();
 });
 
 mongoose.model('Inbox', schema);

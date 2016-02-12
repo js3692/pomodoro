@@ -7,26 +7,30 @@ var schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  priority: {
+    type: String,
+    default: 'normal',
+    enum: ['low', 'normal', 'high']
+  },
+  notes: {
+    type: String
+  },
   due: {
     type: Date
   },
   lastModified: {
     type: Date
   },
-  notes: {
-    type: String
-  },
-  priority: {
-    enum: ['low', 'normal', 'high']
-  },
   inbox: {
     type: mongoose.Schema.Types.ObjectId,
+    required: true,
     ref: 'Inbox'
   }
 });
 
-schema.pre('save', function () {
+schema.pre('save', function (next) {
   this.lastModified = new Date();
+  next();
 });
 
 mongoose.model('Task', schema);
