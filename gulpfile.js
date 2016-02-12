@@ -39,7 +39,7 @@ gulp.task('lintJS', function () {
 });
 
 gulp.task('buildJS', ['lintJS'], function () {
-  return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+  return gulp.src(['./browser/js/auth.js', './browser/js/app.js', './browser/js/**/*.js'])
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(concat('main.js'))
@@ -85,7 +85,7 @@ gulp.task('buildCSS', function () {
 
   return gulp.src('./browser/scss/main.scss')
     .pipe(plumber({
-        errorHandler: notify.onError('SASS processing failed! Check your gulp process.')
+      errorHandler: notify.onError('SASS processing failed! Check your gulp process.')
     }))
     .pipe(sassCompilation)
     .pipe(rename('style.css'))
@@ -104,7 +104,7 @@ gulp.task('buildCSSProduction', function () {
 });
 
 gulp.task('buildJSProduction', function () {
-  return gulp.src(['./browser/js/app.js', './browser/js/**/*.js'])
+  return gulp.src(['./browser/js/auth.js', './browser/js/app.js', './browser/js/**/*.js'])
     .pipe(concat('main.js'))
     .pipe(babel())
     .pipe(ngAnnotate())

@@ -1,13 +1,19 @@
 'use strict';
 
-window.app = angular.module('Pomodoro', ['AuthControl', 'ui.router', 'ui.bootstrap', 'ngAnimate']);
+window.app = angular.module('Pomodoro', [
+  'AuthControl',
+  'ui.router',
+  'ui.bootstrap',
+  'ngAnimate',
+  'angularSpinner'
+]);
 
-app.config(function ($urlRouterProvider, $locationProvider) {
+app.config(['$urlRouterProvider', '$locationProvider', function ($urlRouterProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise('/');
-});
+}]);
 
-app.run(function ($rootScope, AuthService, $state) {
+app.run(['$rootScope', 'AuthService', '$state', function ($rootScope, AuthService, $state) {
 
   var destinationStateRequiresAuth = function (state) {
     return state.data && state.data.authenticate;
@@ -23,8 +29,8 @@ app.run(function ($rootScope, AuthService, $state) {
 
     AuthService.getLoggedInUser().then(function (user) {
       if (user) $state.go(toState.name, toParams);
-      else $state.go('login');
+      else $state.go('home');
     });
   });
 
-});
+}]);

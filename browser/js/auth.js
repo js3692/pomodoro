@@ -60,6 +60,13 @@
       });
     };
 
+    this.signup = function (credentials) {
+      return $http.post('/api/users', credentials)
+        .catch(function () {
+          return $q.reject({ message: 'Please try a different email' });
+        });
+    },
+
     this.login = function (credentials) {
       return $http.post('/login', credentials)
         .then(onSuccessfulLogin)
