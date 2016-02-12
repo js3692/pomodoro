@@ -1,4 +1,4 @@
-app.config(function ($stateProvider) {
+app.config(['$stateProvider', function ($stateProvider) {
   $stateProvider.state('profile', {
     url: '/profile',
     templateUrl: 'js/profile/profile.html',
@@ -6,4 +6,4 @@ app.config(function ($stateProvider) {
     	authenticate: true
   	}
   });
-});
+}]);
