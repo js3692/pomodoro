@@ -1,18 +1,80 @@
+$success: #3182F0;
+$success-selected: #047693;
+$success-light-shade: #9bd8e7;
+$danger: #ef6144;
+$danger-selected: #eb3915;
+
+$tomato: #F04531;
+
+@import 'mixins/main';
+@import url(https://fonts.googleapis.com/css?family=Poppins:400,300,500,600);
+
 * {
   box-sizing: border-box;
 }
-@import 'mixins/main';
 
 body {
   background: #fdfdfd;
+  font-family: 'Poppins', sans-serif;
+
+  button {
+  	border-radius: 0 !important;
+    height: 34px !important;
+  }
+
+  .btn-success {
+    background-color: $success;
+    border-color: $success;
+    &:hover, &:active, &:focus {
+      background-color: #fff;
+      border-color: $success;
+      color: $success;
+    }
+    &:active:focus {
+      background-color: $success-selected;
+    }
+    &:active:hover {
+      background-color: $success-selected;
+    }
+
+  }
+  .btn-success[disabled] {
+    background-color: $success-light-shade;
+    border-color: $success-light-shade;
+    &:hover {
+      border-color: $success;
+      background-color: #fff;
+      color: $success;
+    }
+  }
+  .btn-danger {
+    background-color: $danger;
+    border-color: $danger;
+    &:hover, &:active, &:focus {
+      background-color: #fff;
+      border-color: $danger;
+      color: $danger;
+    }
+    &:active:focus {
+      background-color: $danger-selected;
+    }
+    &:active:hover {
+      background-color: $danger-selected;
+    }
+  }
+  .btn-danger[disabled]:hover {
+    border-color: $danger;
+    background-color: #fff;
+    color: $danger;
+  }
+
 }
 
 #main {
-  padding-top: 60px;
   margin: 0 auto;
 }
 
 @import 'directives/main';
 @import 'home/main';
-@import 'about/main';
-@import 'login/main';
+@import 'signup/main';
+@import 'dashboard/main';

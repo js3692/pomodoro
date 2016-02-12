@@ -1,0 +1,46 @@
+<section id="home">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-4">
+				<div class="header row">
+					<span><h2>Get things done with Pomodoro</h2></span>
+					<img src="/assets/pomodoro.png">
+				</div>
+				<div class="body row">
+					<form name="LoginForm" ng-submit="login(credentials)" class="form-horizontal" novalidate>
+						<div class="form-group">
+					  	<div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <span id="signup"><h5>Never used it before? Sign up <a ui-sref="signup">here</a></h5></span>
+					  	</div>
+					  </div>
+					  <div class="form-group has-feedback" ng-class="{ 'has-success': LoginForm.EmailInput.$valid, 'has-error': LoginForm.EmailInput.$dirty && LoginForm.EmailInput.$invalid }">
+					    <label for="Email" class="sr-only control-label">Email</label>
+					    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <input name="EmailInput" type="email" class="form-control" id="Email" placeholder="Email" ng-model="credentials.email" required>
+					    </div>
+					  </div>
+					  <div class="form-group has-feedback" ng-class="{ 'has-success': LoginForm.PasswordInput.$valid, 'has-error': LoginForm.PasswordInput.$dirty && LoginForm.PasswordInput.$invalid }">
+					    <label for="Password" class="sr-only control-label">Password</label>
+					    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <input name="PasswordInput" type="password" class="form-control" id="Password" placeholder="Password" ng-model="credentials.password" ng-minlength="8" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <button type="submit" class="btn btn-block btn-success" ng-disabled="LoginForm.$invalid">
+					      	<span us-spinner="{radius: 6, width: 2, length: 5}" spinner-on="loading"></span>
+					      	<span ng-hide="loading">Log in</span>
+				      	</button>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					  	<div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <span id="login-error" ng-hide="!error"><h5>{{ error }}</h5></span>
+					  	</div>
+					  </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
