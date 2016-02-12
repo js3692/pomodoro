@@ -15,4 +15,4 @@ bower_components
 # Miscellaneous
 .idea
 .DS_Store
-coverage%
+coverage

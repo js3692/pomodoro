@@ -58,12 +58,12 @@ gulp.task('testServerJS', function () {
 gulp.task('testServerJSWithCoverage', function (done) {
   gulp.src('./server/**/*.js')
     .pipe(istanbul({
-        includeUntested: true
+      includeUntested: true
     }))
     .pipe(istanbul.hookRequire())
     .on('finish', function () {
       gulp.src('./tests/server/**/*.js', {read: false})
-        .pipe(mocha({reporter: 'spec'}))
+        .pipe(mocha({ reporter: 'spec' }))
         .pipe(istanbul.writeReports({
             dir: './coverage/server/',
             reporters: ['html', 'text']
