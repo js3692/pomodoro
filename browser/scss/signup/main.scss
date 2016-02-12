@@ -1,0 +1,70 @@
+section#signup {
+	background: linear-gradient(to bottom right, #ff4f2f, #ffa797);
+	height: 100vh;
+	position: relative;
+
+	div.container-fluid {
+		width: 100%;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	.header {
+		span h2 {
+			color: white;
+			padding-left: 25px;
+		}
+	}
+
+	div.body {
+		margin-top: 30px;
+		.form-horizontal .form-group {
+			margin-left: 0;
+			margin-right: 0;
+		}
+		#password-help h6 {
+			margin: 0;
+			padding-left: 12px;
+		}
+		#signup-error {
+			color: red;
+			text-align: center;
+		}
+	}
+
+	.has-success .form-control {
+		border-bottom: solid 1px $success;	
+	}
+	.has-error .form-control {
+		border-bottom: solid 1px $danger;
+	}
+
+  input {
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		border-bottom: solid 1px white;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		color: white;
+		&::-webkit-input-placeholder {
+			font-weight: 300;
+			color: white;
+		}
+		&::-moz-placeholder {
+			font-weight: 300;
+			color: white;
+		}
+		&:-ms-input-placeholder {
+			font-weight: 300;
+			color: white;
+		}
+	}
+	input:focus {
+		border-bottom: solid 1px dimgrey;
+	}
+	.form-control:focus {
+		box-shadow: none;
+	}
+}

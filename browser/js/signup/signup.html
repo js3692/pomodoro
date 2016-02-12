@@ -1,0 +1,64 @@
+<section id="signup">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-4">
+				<div class="header row">
+					<span><h2>Sign up</h2></span>
+				</div>
+				<div class="body row">
+					<form name="SignupForm" ng-submit="signup(credentials)" class="form-horizontal" novalidate>
+						<div class="form-group has-feedback" ng-class="{ 'has-success': SignupForm.FirstNameInput.$dirty && SignupForm.FirstNameInput.$valid }">
+				      <label for="FirstName" class="control-label sr-only">First name</label>
+						    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+				          <input name="FirstNameInput" type="text" class="form-control" id="FirstName" placeholder="First name (optional)" ng-model="credentials.firstName">
+				        </div>
+				    </div>
+				    <div class="form-group has-feedback" ng-class="{ 'has-success': SignupForm.LastNameInput.$dirty &&  SignupForm.LastNameInput.$valid }">
+				      <label for="LastName" class="control-label sr-only">Last name</label>
+						    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+				          <input name="LastNameInput" type="text" class="form-control" id="LastName" placeholder="Last name (optional)" ng-model="credentials.lastName">
+				        </div>
+				    </div>
+					  <div class="form-group has-feedback" ng-class="{ 'has-success': SignupForm.EmailInput.$valid, 'has-error': SignupForm.EmailInput.$dirty && SignupForm.EmailInput.$invalid }">
+					    <label for="Email" class="sr-only control-label">Email</label>
+					    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <input name="EmailInput" type="email" class="form-control" id="Email" placeholder="Email" ng-model="credentials.email" required>
+					    </div>
+					  </div>
+					  <div class="form-group has-feedback" ng-class="{ 'has-success': SignupForm.PasswordInput.$valid, 'has-error': SignupForm.PasswordInput.$dirty && SignupForm.PasswordInput.$invalid }">
+					    <label for="Password" class="sr-only control-label">Password</label>
+					    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <input name="PasswordInput" type="password" class="form-control" id="Password" placeholder="Password" ng-model="credentials.password" ng-minlength="8" ng-pattern="/^[a-zA-Z0-9]*$/" required>
+					    </div>
+					  </div>
+						<div class="form-group">
+					  	<div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <span id="password-help"><h6>(Minimum 8 alphanumeric characters)</h6></span>
+					  	</div>
+					  </div>
+					  <div class="form-group has-feedback" ng-class="{ 'has-success': SignupForm.ConfirmPasswordInput.$valid, 'has-error': SignupForm.ConfirmPasswordInput.$dirty && SignupForm.ConfirmPasswordInput.$invalid }">
+				      <label for="ConfirmPassword" class="control-label sr-only">Confirm your password</label>
+					    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+				        <input name="ConfirmPasswordInput" type="password" class="form-control" id="ConfirmPassword" placeholder="Confirm your password" ng-model="confirm" match-password required>
+				      </div>
+				    </div>
+					  <br>
+					  <div class="form-group">
+					    <div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <button type="submit" class="btn btn-block btn-success" ng-disabled="SignupForm.$invalid">
+					      	<span us-spinner="{radius: 6, width: 2, length: 5}" spinner-on="loading"></span>
+					      	<span ng-hide="loading">Sign up</span>
+				      	</button>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					  	<div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+					      <span id="signup-error" ng-hide="!error"><h5>{{ error }}</h5></span>
+					  	</div>
+					  </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
