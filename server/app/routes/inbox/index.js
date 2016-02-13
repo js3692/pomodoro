@@ -43,11 +43,19 @@ router.get('/:inboxId', function (req, res) {
 });
 
 router.put('/:inboxId', function (req, res, next) {
-	Inbox.findByIdAndUpdate(req.inbox._id, req.body, { new: true })
-		.then(function (updatedInbox) {
-			res.json(updatedInbox);
-		})
-		.catch(next);
+	if(req.body.delete) {
+		Inbox.remove({ _id: req.inbox._id })
+			.then(function () {
+				res.sendStatus(200);
+			})
+			.catch(next);
+	} else {
+		Inbox.findByIdAndUpdate(req.inbox._id, req.body, { new: true })
+			.then(function (updatedInbox) {
+				res.json(updatedInbox);
+			})
+			.catch(next);
+	}
 });
 
 router.use('/:inboxId/tasks', require('../tasks'));

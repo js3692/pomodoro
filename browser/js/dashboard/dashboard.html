@@ -1,7 +1,56 @@
 <section id="dashboard">
 	<div class="container-fluid">
-		<div class="row">
-			{{ user }}
+		<div class="row board">
+			<div class="col-sm-6 left-column">
+				<div class="row board-panel">
+					<div class="panel-container">
+						<article ng-repeat="inbox in inboxes track by $index">
+							<div class="inbox-title" ng-click="isCollapsed = !isCollapsed">
+								{{ inbox.title }}
+								<button class="btn" ng-click="createTask($event, inbox._id);">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+								<button class="btn" ng-click="editInbox($event, inbox._id);">
+									<span class="glyphicon glyphicon-wrench"></span>
+								</button>
+								<button class="btn" ng-click="deleteInbox($event, inbox._id);">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</div>
+							<div class="inbox-tasks" uib-collapse="isCollapsed">
+								<div class="task" ng-repeat="task in tasksInInbox(inbox._id) track by $index">
+									<br>
+									{{ task.title }}
+									<br>
+								</div>
+								<br>
+							</div>
+							<br>
+						</article>
+						<article>
+							<div class="inbox-title" ng-click="createInbox()">
+								<span class="glyphicon glyphicon-plus"></span>&nbsp;Create new inbox
+							</div>
+						</article>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 right-column">
+				<div class="row board-panel">
+					<div class="panel-container task-detail">
+						<h4>
+							{{ user.inbox }}
+						</h4>
+					</div>
+				</div>
+				<div class="row board-panel">
+					<div class="panel-container timer">
+						<h4>
+							Timer
+						</h4>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
