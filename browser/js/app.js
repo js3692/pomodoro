@@ -5,7 +5,8 @@ window.app = angular.module('Pomodoro', [
   'ui.router',
   'ui.bootstrap',
   'ngAnimate',
-  'angularSpinner'
+  'angularSpinner',
+  'timer'
 ]);
 
 app.config(['$urlRouterProvider', '$locationProvider', function ($urlRouterProvider, $locationProvider) {

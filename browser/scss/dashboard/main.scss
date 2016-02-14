@@ -93,8 +93,6 @@ section#dashboard {
 			line-height: 60px;
 			font-size: 1.6em;
 			position: relative;
-			button {
-			}
 			button:nth-child(1) {
 				position: absolute;
 				top: 50%;
@@ -102,11 +100,11 @@ section#dashboard {
 				right: 105px;
 				width: 80px;
 			}
-			button:nth-child(2) {
+			button:nth-child(1) {
 				@include action-button;
 				right: 60px;
 			}
-			button:nth-child(3) {
+			button:nth-child(2) {
 				@include action-button;
 				right: 15px;
 			}
@@ -154,6 +152,42 @@ section#dashboard {
 		}
 		.detail:last-child {
 			margin-bottom: 0;
+			button {
+				position: absolute;
+				right: 0;
+				bottom: 45px;
+			}
+		}
+		.timer {
+			article {
+				height: 100%;
+				overflow-y: hidden;
+			}
+			.timer-menu {
+				background-color: #01A350;
+				height: 60px;
+				line-height: 60px;
+				color: white;
+				padding-left: 15px;
+				font-size: 1.6em;
+				text-align: center;
+				button {
+					width: 120px;
+				}
+			}
+			.time {
+				height: calc(100% - 60px);
+				background-color: #fff;
+				padding: 30px;
+				font-size: 5.5em;
+				position: relative;
+				timer {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
+			}
 		}
 	}
 }

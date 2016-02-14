@@ -34,6 +34,7 @@ app.controller('DashboardCtrl', [
 		'$q',
 		'$timeout',
 		'$state',
+		'$compile',
 		'user',
 		'inboxes',
 		'tasks',
@@ -42,7 +43,7 @@ app.controller('DashboardCtrl', [
 		'InboxSettings',
 		'TaskSettings',
 		'AuthService',
-	function ($scope, $q, $timeout, $state, user, inboxes, tasks, InboxFactory, TaskFactory, InboxSettings, TaskSettings, AuthService) {
+	function ($scope, $q, $timeout, $state, $compile, user, inboxes, tasks, InboxFactory, TaskFactory, InboxSettings, TaskSettings, AuthService) {
   $scope.logout = function () {
     AuthService.logout().then(function () {
       $state.go('home');
@@ -51,6 +52,7 @@ app.controller('DashboardCtrl', [
 	$scope.user = user;
 	$scope.inboxes = inboxes;
 	$scope.tasks = tasks;
+	$scope.timerQueue = [];
 
 	$scope.$watch('inboxes', function (newSet) {
     $scope.inboxes = newSet;
@@ -96,8 +98,7 @@ app.controller('DashboardCtrl', [
 		empty: true,
 		inbox: {
 			title: "Select a task"
-		},
-		// due: new Date()
+		}
 	}
 
 	var convertDateForTask = function (task) {
@@ -105,12 +106,29 @@ app.controller('DashboardCtrl', [
 		return task;
 	}
 
+	var arrangePomodoros = function (numberOfPomodoros) {
+		$scope.timerQueue = [];
+		while (numberOfPomodoros > 0) {
+			var five = $compile("<timer interval=\"1000\" countdown=\"5\" finish-callback=\"finished(false)\">{{ mminutes }}:{{ sseconds }}</timer>")
+			var three = $compile("<timer interval=\"1000\" countdown=\"3\" finish-callback=\"finished(true)\">{{ mminutes }}:{{ sseconds }}</timer>")
+			$scope.timerQueue.push(five, three)
+			// var fiveMinuteTimer = $compile("<timer interval=\"1000\" countdown=\"300\" finish-callback=\"finished()\">{{ mminutes }}:{{ sseconds }}</timer>");
+			// var twentyFiveMinuteTimer = $compile("<timer interval=\"1000\" countdown=\"1500\" finish-callback=\"finished()\">{{ mminutes }}:{{ sseconds }}</timer>")
+			// $scope.timerQueue.push(twentyFiveMinuteTimer, fiveMinuteTimer)
+			numberOfPomodoros--;
+		}
+		$scope.timerQueue.pop();
+	}
+
 	$scope.currentTask = dummyTask;
+
+
 
 	$scope.select = function (event, task) {
     angular.element("#dashboard .inbox-tasks .task span").removeClass('active');
 		angular.element(event.target).addClass('active');
 		$scope.currentTask = convertDateForTask(task);
+		arrangePomodoros($scope.currentTask.pomodoros);
 	}
 
 	$scope.createTask = function (event, inboxId) {
@@ -150,6 +168,8 @@ app.controller('DashboardCtrl', [
 
 	$scope.changePomodoro = function (number) {
 		$scope.currentTask.pomodoros += number;
+		$scope.updateTask($scope.currentTask);
+		arrangePomodoros($scope.currentTask.pomodoros);
 	}
 
 	$scope.changePriority = function (higher) {
@@ -159,6 +179,8 @@ app.controller('DashboardCtrl', [
 		else if ($scope.currentTask.priority === 'high') newPriority = higher ? '' : 'normal';
 
 		if(newPriority) $scope.currentTask.priority = newPriority;
+
+		$scope.updateTask($scope.currentTask);
 	}
 
 	$scope.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -183,6 +205,8 @@ app.controller('DashboardCtrl', [
 		if(month) $scope.currentTask.due.setMonth($scope.months.indexOf(month));
 		else if(day) $scope.currentTask.due.setDate(day);
 		else if (year) $scope.currentTask.due.setFullYear(year);
+
+		$scope.updateTask($scope.currentTask);
 	}
 
 	$scope.updateTask = function (task) {
@@ -197,8 +221,43 @@ app.controller('DashboardCtrl', [
 
 				$scope.tasks.splice(idx, 0, updatedTask);
 
-				$scope.currentTask = convertDateForTask(updatedTask[0]);
+				$scope.currentTask = convertDateForTask(updatedTask);
 			})
 	}
 
+	$scope.timerRunnig = false;
+	
+	$scope.startTimer = function () {
+		$scope.timerRunnig = true;
+		var nextTimer = $scope.timerQueue.shift();
+		angular.element("div.time").append(nextTimer($scope))
+	}
+
+	$scope.cancelTimer = function () {
+		$scope.timerRunnig = false;
+		angular.element("timer")[0].clear();
+		angular.element("timer").remove();
+		$scope.currentTask.pomodoros--;
+		$scope.updateTask($scope.currentTask);
+		$scope.timerQueue.shift();
+	}
+
+	$scope.finished = function (isBreak) {
+		angular.element("timer").remove();
+
+		if (!isBreak) {
+			$scope.currentTask.pomodoros--;
+			$scope.updateTask($scope.currentTask);
+		}
+
+		if($scope.timerQueue.length > 0) {
+			var nextTimer = $scope.timerQueue.shift();
+			$timeout(function () {
+				angular.element("div.time").append(nextTimer($scope));
+			}, 1000)
+		} else {
+			$scope.timerRunnig = false;
+			alert("Task Completed!")
+		}
+	}
 }]);

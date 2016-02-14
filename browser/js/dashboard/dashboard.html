@@ -3,7 +3,7 @@
 		<div class="row board">
 			<div class="col-sm-6 left-column">
 				<div class="row board-panel">
-					<!-- <div class="panel-container" style="background: none; background-color: white; position: absolute; top:10px; z-index: 10; padding: 15px; height: calc(100% - 20px); width: calc(100% - 20px); opacity: 0.8;"></div> -->
+					<div class="panel-container" ng-hide="!timerRunnig" style="background: none; background-color: white; position: absolute; top:10px; z-index: 10; padding: 15px; height: calc(100% - 20px); width: calc(100% - 20px); opacity: 0.8;"></div>
 					<div class="panel-container">
 						<article ng-repeat="inbox in inboxes track by $index">
 							<div class="inbox-title" ng-click="isCollapsed = !isCollapsed">
@@ -40,9 +40,15 @@
 			<div class="col-sm-6 right-column">
 				<div class="row board-panel">
 					<div class="panel-container timer">
-						<h4>
-							Timer
-						</h4>
+						<article>
+							<div class="timer-menu">
+								<span ng-hide="!currentTask.empty">Get things done with Pomodoro</span>
+								<button type="button" class="btn btn-success" ng-disabled="!timerQueue.length" ng-click="startTimer()" ng-hide="currentTask.empty">Start</button>
+								<button type="button" class="btn btn-danger" ng-click="cancelTimer()" ng-hide="currentTask.empty">Cancel</button>
+							</div>
+							<div class="time">
+							</div>
+						</article>
 					</div>
 				</div>
 				<div class="row board-panel">
@@ -50,7 +56,6 @@
 						<article>
 							<div class="task-title">
 								{{ "[" + currentTask.inbox.title + "] " + currentTask.title }}
-								<button type="button" class="btn btn-danger" ng-click="updateTask(currentTask)" ng-hide="currentTask.empty">Save</button>
 								<button class="btn" ng-click="editTaskTitle(currentTask.inbox._id, currentTask._id);" ng-hide="currentTask.empty">
 									<span class="glyphicon glyphicon-wrench"></span>
 								</button>
@@ -117,6 +122,7 @@
 								</div>
 								<div class="detail" ng-hide="currentTask.empty">
 									<textarea class="form-control" rows="3" ng-model="currentTask.notes"></textarea>
+									<button type="button" class="btn btn-danger" ng-click="updateTask(currentTask)">Save</button>
 									<div class="key">Notes</div>
 								</div>
 							</div>
