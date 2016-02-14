@@ -50,5 +50,5 @@ module.exports = function (app) {
   // ============================================
 
   require(path.join(__dirname, 'local'))(app);
-  require(path.join(__dirname, 'google'))(app);
+  // require(path.join(__dirname, 'google'))(app);
 };
