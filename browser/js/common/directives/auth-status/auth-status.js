@@ -1,20 +1,8 @@
-app.directive('authStatus', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('authStatus', function ($rootScope, AuthService, AUTH_EVENTS) {
   return {
     restrict: 'E',
     link: function (scope) {
       scope.user = null;
-
-      console.log("I'm alive")
-
-      scope.isLoggedIn = function () {
-        return AuthService.isAuthenticated();
-      };
-
-      scope.logout = function () {
-        AuthService.logout().then(function () {
-          $state.go('home');
-        });
-      };
 
       var setUser = function () {
         AuthService.getLoggedInUser().then(function (user) {
