@@ -46,7 +46,8 @@ router.put('/:taskId', function (req, res, next) {
 		Task.findByIdAndUpdate(req.params.taskId, req.body, { new: true })
 			.populate('inbox')
 			.then(function (updatedTask) {
-				// Following will be an array for some reason..
+				// Following was an array for some reason during testing..
+				// but it is an object in the browser (which it should be)
 				res.json(updatedTask);
 			})
 			.catch(next);
