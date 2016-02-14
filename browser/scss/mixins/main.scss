@@ -5,3 +5,55 @@
     clear: both;
   }
 }
+
+@mixin clean-input {
+	input {
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		border-bottom: solid 1px white;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		color: white;
+		&::-webkit-input-placeholder {
+			color: white;
+			font-weight: 300;
+		}
+		&::-moz-placeholder {
+			color: white;
+			font-weight: 300;
+		}
+		&:-ms-input-placeholder {
+			color: white;
+			font-weight: 300;
+		}
+	}
+	input:focus {
+		border-bottom: solid 1px dimgrey;
+	}
+	.form-control:focus {
+		box-shadow: none;
+	}
+}
+
+@mixin action-button {
+	width: 40px;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	border: solid 2px #9ABD14;
+	background-color: #9ABD14;
+	&:hover, &:active, &:focus {
+		background-color: #87A319;
+		color: #fff;
+	}
+  &:active:focus {
+    background-color: #87A319;
+  }
+  &:active:hover {
+    background-color: #87A319;
+  }
+	span.glyphicon {
+		vertical-align: baseline;
+	}
+}

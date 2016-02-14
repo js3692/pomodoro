@@ -46,31 +46,5 @@ section#home {
 		border-bottom: solid 1px $danger;
 	}
 
-  input {
-		background-color: transparent;
-		border: none;
-		border-radius: 0;
-		border-bottom: solid 1px white;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-		color: white;
-		&::-webkit-input-placeholder {
-			color: white;
-			font-weight: 300;
-		}
-		&::-moz-placeholder {
-			color: white;
-			font-weight: 300;
-		}
-		&:-ms-input-placeholder {
-			color: white;
-			font-weight: 300;
-		}
-	}
-	input:focus {
-		border-bottom: solid 1px dimgrey;
-	}
-	.form-control:focus {
-		box-shadow: none;
-	}
+  @include clean-input;
 }

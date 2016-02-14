@@ -40,7 +40,7 @@ body {
   }
   .btn-success[disabled] {
     background-color: $success-light-shade;
-    border-color: $success-light-shade;
+    // border-color: $success-light-shade;
     &:hover {
       border-color: $success;
       background-color: #fff;
@@ -68,6 +68,10 @@ body {
     color: $danger;
   }
 
+  .modal-content {
+    border-radius: 0 !important;
+  }
+
 }
 
 #main {
@@ -78,3 +82,5 @@ body {
 @import 'home/main';
 @import 'signup/main';
 @import 'dashboard/main';
+@import 'inbox/main';
+@import 'task/main';

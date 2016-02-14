@@ -36,12 +36,21 @@ router.get('/:taskId', function (req, res, next) {
 });
 
 router.put('/:taskId', function (req, res, next) {
-	Task.findByIdAndUpdate(req.params.taskId, req.body, { new: true })
-		.then(function (updatedTask) {
-			// Following will be an array for some reason..
-			res.json(updatedTask);
-		})
-		.catch(next);
+	if(req.body.delete) {
+		Task.remove({ _id: req.params.taskId })
+			.then(function () {
+				res.sendStatus(200);
+			})
+			.catch(next);
+	} else {
+		Task.findByIdAndUpdate(req.params.taskId, req.body, { new: true })
+			.populate('inbox')
+			.then(function (updatedTask) {
+				// Following will be an array for some reason..
+				res.json(updatedTask);
+			})
+			.catch(next);
+	}
 });
 
 module.exports = router;

@@ -1,0 +1,30 @@
+#inbox-settings {
+	.row {
+		margin: 0;
+	}
+	.save-btn {
+		padding-right: 5px;
+	}
+	.cancel-btn {
+		padding-left: 5px;
+	}
+	form {
+		@include clean-input;
+		input {
+			color: $success;
+			border-bottom: solid 1px dimgrey;
+			&::-webkit-input-placeholder {
+				color: black;
+			}
+			&::-moz-placeholder {
+				color: black;
+			}
+			&:-ms-input-placeholder {
+				color: black;
+			}
+		}
+		input:focus {
+			border-bottom: solid 1px $success;
+		}
+	}
+}

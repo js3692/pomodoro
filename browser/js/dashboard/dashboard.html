@@ -3,11 +3,12 @@
 		<div class="row board">
 			<div class="col-sm-6 left-column">
 				<div class="row board-panel">
+					<!-- <div class="panel-container" style="background: none; background-color: white; position: absolute; top:10px; z-index: 10; padding: 15px; height: calc(100% - 20px); width: calc(100% - 20px); opacity: 0.8;"></div> -->
 					<div class="panel-container">
 						<article ng-repeat="inbox in inboxes track by $index">
 							<div class="inbox-title" ng-click="isCollapsed = !isCollapsed">
-								{{ inbox.title }}
-								<button class="btn" ng-click="createTask($event, inbox._id);">
+								<span>{{ inbox.title }}</span>
+								<button class="btn" ng-click="createTask($event, inbox._id, inbox.title);">
 									<span class="glyphicon glyphicon-plus"></span>
 								</button>
 								<button class="btn" ng-click="editInbox($event, inbox._id);">
@@ -17,10 +18,11 @@
 									<span class="glyphicon glyphicon-trash"></span>
 								</button>
 							</div>
-							<div class="inbox-tasks" uib-collapse="isCollapsed">
+							<div class="inbox-tasks" ng-init="isCollapsed=true" uib-collapse="isCollapsed">
 								<div class="task" ng-repeat="task in tasksInInbox(inbox._id) track by $index">
 									<br>
-									{{ task.title }}
+									<span class="glyphicon glyphicon-unchecked"></span>
+									<span id="{{ inbox._id + '-' + $index }}" ng-click="select($event, task)">{{ task.title }}</span>
 									<br>
 								</div>
 								<br>
@@ -37,17 +39,88 @@
 			</div>
 			<div class="col-sm-6 right-column">
 				<div class="row board-panel">
-					<div class="panel-container task-detail">
-						<h4>
-							{{ user.inbox }}
-						</h4>
-					</div>
-				</div>
-				<div class="row board-panel">
 					<div class="panel-container timer">
 						<h4>
 							Timer
 						</h4>
+					</div>
+				</div>
+				<div class="row board-panel">
+					<div class="panel-container task-panel">
+						<article>
+							<div class="task-title">
+								{{ "[" + currentTask.inbox.title + "] " + currentTask.title }}
+								<button type="button" class="btn btn-danger" ng-click="updateTask(currentTask)" ng-hide="currentTask.empty">Save</button>
+								<button class="btn" ng-click="editTaskTitle(currentTask.inbox._id, currentTask._id);" ng-hide="currentTask.empty">
+									<span class="glyphicon glyphicon-wrench"></span>
+								</button>
+								<button class="btn" ng-click="deleteTask(currentTask.inbox._id, currentTask._id);" ng-hide="currentTask.empty">
+									<span class="glyphicon glyphicon-trash"></span>
+								</button>
+							</div>
+							<div class="task-detail">
+								<div class="detail" id="task-message" ng-hide="!currentTask.empty">Select a task from your inbox to edit, delete, or start a pomodoro.</div>
+								<div class="detail" ng-hide="currentTask.empty">
+									<div class="btn-group">
+									  <button type="button" class="btn btn-success" ng-disabled="currentTask.pomodoros <= 1" ng-click="changePomodoro(-1)"><span class="glyphicon glyphicon-minus"></span></button>
+									  <button type="button" class="btn btn-success">{{ currentTask.pomodoros }}</button>
+									  <button type="button" class="btn btn-success" ng-disabled="currentTask.pomodoros > 3" ng-click="changePomodoro(1)"><span class="glyphicon glyphicon-plus"></span></button>
+									</div>
+									<div class="key">Pomodoros</div>
+								</div>
+								<div class="detail" ng-hide="currentTask.empty">
+									<div class="btn-group">
+									  <button type="button" class="btn btn-success" ng-disabled="currentTask.priority === 'low'" ng-click="changePriority(false)"><span class="glyphicon glyphicon-minus"></span></button>
+									  <button type="button" class="btn btn-success" style="width: 76px;">{{ currentTask.priority }}</button>
+									  <button type="button" class="btn btn-success" ng-disabled="currentTask.priority === 'high'" ng-click="changePriority(true)"><span class="glyphicon glyphicon-plus"></span></button>
+									</div>
+									<div class="key">Priority</div>
+								</div>
+								<div class="detail" ng-hide="currentTask.empty">
+							    <div class="btn-group" uib-dropdown>
+							      <button type="button" class="btn btn-success" uib-dropdown-toggle >
+							      	{{ months[currentTask.due.getMonth()] }}&nbsp;&nbsp;<span class="caret"></span>
+							      </button>
+							      <ul class="uib-dropdown-menu" role="menu" style="height: 150px; overflow-y: scroll;">
+						          <li role="menuitem" ng-repeat="month in months">
+						          	<a ng-click="selectDate(month)" style="cursor: pointer">
+						          		{{ month }}
+						          	</a>
+						          </li>
+							      </ul>
+							    </div>
+							    <div class="btn-group" uib-dropdown>
+							      <button type="button" class="btn btn-success" uib-dropdown-toggle>
+							      	{{ currentTask.due.getDate() }}&nbsp;&nbsp;<span class="caret"></span>
+							      </button>
+							      <ul class="uib-dropdown-menu" role="menu" style="height: 150px; overflow-y: scroll;">
+						          <li role="menuitem" ng-repeat="day in days(currentTask.due)">
+						          	<a ng-click="selectDate(null, day)" style="cursor: pointer">
+						          		{{ day }}
+						          	</a>
+						          </li>
+							      </ul>
+							    </div>
+							    <div class="btn-group" uib-dropdown>
+							      <button type="button" class="btn btn-success" uib-dropdown-toggle>
+							      	{{ currentTask.due.getFullYear() }}&nbsp;&nbsp;<span class="caret"></span>
+							      </button>
+							      <ul class="uib-dropdown-menu" role="menu">
+						          <li role="menuitem" ng-repeat="year in years()">
+						          	<a ng-click="selectDate(null, null, year)" style="cursor: pointer">
+						          		{{ year }}
+						          	</a>
+						          </li>
+							      </ul>
+							    </div>
+									<div class="key">Due date</div>
+								</div>
+								<div class="detail" ng-hide="currentTask.empty">
+									<textarea class="form-control" rows="3" ng-model="currentTask.notes"></textarea>
+									<div class="key">Notes</div>
+								</div>
+							</div>
+						</article>
 					</div>
 				</div>
 			</div>

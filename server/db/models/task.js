@@ -13,7 +13,12 @@ var schema = new mongoose.Schema({
     enum: ['low', 'normal', 'high']
   },
   notes: {
-    type: String
+    type: String,
+    default: ""
+  },
+  pomodoros: {
+    type: Number,
+    default: 1
   },
   due: {
     type: Date

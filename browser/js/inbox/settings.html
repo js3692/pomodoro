@@ -1,27 +1,27 @@
 <div class="modal-body" id="inbox-settings">
-    <div class="row">
-      <h3>{{ inbox. title }}</h3>
+  <div class="row">
+    <h3>{{ inbox.title }}</h3>
+    <br>
+  </div>
+  <form name="InboxSettings" ng-submit="update(newInbox)" class="form-horizontal" novalidate>
+    <div class="form-group has-feedback" ng-class="{ 'has-success': InboxSettings.TitleInput.$dirty && InboxSettings.TitleInput.$valid }">
+      <label for="Title" class="control-label sr-only">Inbox title</label>
+        <div class="col-sm-12">
+          <input name="TitleInput" type="text" class="form-control" id="Title" placeholder="New title" ng-model="newInbox.title">
+        </div>
     </div>
-    <form name="InboxSettings" ng-submit="update(newInbox)" class="form-horizontal" novalidate>
-      <div class="form-group has-feedback" ng-class="{ 'has-success': InboxSettings.TitleInput.$dirty && InboxSettings.TitleInput.$valid }">
-        <label for="Title" class="control-label sr-only">Inbox title</label>
-          <div class="col-sm-12">
-            <input name="TitleInput" type="text" class="form-control" id="Title" placeholder="New title" ng-model="newInbox.title">
-          </div>
+    <div class="form-group">
+      <div class="col-xs-6 save-btn">
+        <button type="submit" class="btn btn-block btn-success" ng-disabled="InboxSettings.$invalid">
+          <span us-spinner="{radius: 6, width: 2, length: 5}" spinner-on="loading"></span>
+          <span ng-hide="loading">Save</span>
+        </button>
       </div>
-      <br>
-      <div class="form-group">
-        <div class="col-sm-6">
-          <button type="submit" class="btn btn-block btn-success" ng-disabled="InboxSettings.$invalid">
-            <span us-spinner="{radius: 6, width: 2, length: 5}" spinner-on="loading"></span>
-            <span ng-hide="loading">Save</span>
-          </button>
-        </div>
-        <div class="col-sm-6">
-          <button type="reset" class="btn btn-block btn-danger" ng-click="close()">
-            <span>Cancel</span>
-          </button>
-        </div>
+      <div class="col-xs-6 cancel-btn">
+        <button type="reset" class="btn btn-block btn-danger" ng-click="close()">
+          <span>Cancel</span>
+        </button>
       </div>
-    </form>
+    </div>
+  </form>
 </div>

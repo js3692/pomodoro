@@ -2,17 +2,18 @@ section#dashboard {
 	background: linear-gradient(to bottom right, #ff4f2f, #ffa797);
 
 	.board {
-		height: 100vh;
+		height: calc(200vh + 30px);
 		padding: 15px;
 	}
 
 	.left-column, .right-column {
-		height: 100%;
+		height: 100vh;
 		h1, h2, h3, h4, h5, h6 {
 			margin: 0;
 		}
 		.board-panel {
 			padding: 10px;
+			position: relative;
 		}
 	}
 
@@ -21,7 +22,7 @@ section#dashboard {
 			height: 100%;
 		}
 		.panel-container {
-			overflow: scroll;
+			overflow-y: scroll;
 			height: 100%;
 			background: linear-gradient(to bottom right, #fcd9d5, #ffffff);
 			box-shadow: 0 2px 4px 4px rgba(0, 0, 0, 0.14);
@@ -30,69 +31,140 @@ section#dashboard {
 		.inbox-title {
 			background-color: $success;
 			height: 60px;
-			cursor: pointer;
 			color: white;
 			padding-left: 15px;
 			line-height: 60px;
-			font-size: 1.3em;
+			font-size: 1.6em;
 			position: relative;
-			button {
-				width: 40px;
-				position: absolute;
-				top: 50%;
-				transform: translateY(-50%);
-				background-color: transparent;
-				border: solid 2px #9ABD14;
-				background-color: #9ABD14;
-				&:hover, &:active, &:focus {
-					background-color: #87A319;
-					color: #fff;
-				}
-		    &:active:focus {
-		      background-color: #87A319;
-		    }
-		    &:active:hover {
-		      background-color: #87A319;
-		    }
-				span.glyphicon {
-					vertical-align: baseline;
-				}
-			}
-			button:nth-child(1) {
-				right: 105px;
+			cursor: pointer;
+			> button {
+				@include action-button;
 			}
 			button:nth-child(2) {
-				right: 60px;
+				right: 105px;
 			}
 			button:nth-child(3) {
+				right: 60px;
+			}
+			button:nth-child(4) {
 				right: 15px;
 			}
 		}
 		.inbox-tasks {
 			background-color: #fff;
 			padding-left: 30px;
-		}
-		.task {
-
+			.task {
+				font-size: 1.3em;
+				span {
+					cursor: pointer;
+				}
+				span.active {
+					color: $tomato;
+				}
+			}
 		}
 	}
 
 	.right-column {
 		.board-panel:first-child {
-			height: 50%;
+			height: 40%;
 			padding-bottom: 5px;
 		}
 		.board-panel:last-child {
-			height: 50%;
+			height: 60%;
 			padding-top: 5px;
 		}
 		.panel-container {
 			height: 100%;
+			padding: 15px;
 			background: linear-gradient(to bottom right, #fcd9d5, #ffffff);
 			box-shadow: 0 2px 4px 4px rgba(0, 0, 0, 0.14);
 		}
+		.task-panel {
+			article {
+				height: 100%;
+			}
+		}
+		.task-title {
+			background-color: $success;
+			height: 60px;
+			color: white;
+			padding-left: 15px;
+			line-height: 60px;
+			font-size: 1.6em;
+			position: relative;
+			button {
+			}
+			button:nth-child(1) {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				right: 105px;
+				width: 80px;
+			}
+			button:nth-child(2) {
+				@include action-button;
+				right: 60px;
+			}
+			button:nth-child(3) {
+				@include action-button;
+				right: 15px;
+			}
+		}
 		.task-detail {
-			overflow: scroll;
+			height: calc(100% - 60px);
+			overflow-y: scroll;
+			background-color: #fff;
+			padding: 30px;
+			position: relative;
+		}
+		#task-message {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			width: calc(100% - 60px);
+			text-align: center;
+		}
+		.detail {
+			border-bottom: solid 1px black;
+			padding-bottom: 5px;
+			margin-bottom: 30px;
+			position: relative;
+			.btn-group button:nth-child(2) {
+				background-color: #fff;
+				color: #000;
+				cursor: text;
+				&:focus, &:active, &:active:focus {
+					outline: 0;
+					-webkit-box-shadow: none;
+					box-shadow: none;
+					border-color: $success;
+				}
+			}
+			.key {
+				position: absolute;
+				right: 0;
+				bottom: 5px;
+			}
+			textarea.form-control {
+				border-radius: 0;
+				width: calc(100% - 100px);
+				resize: none;
+			}
+		}
+		.detail:last-child {
+			margin-bottom: 0;
 		}
 	}
+}
+
+@media (min-width: 768px) {
+  section#dashboard {
+		.board {
+			height: 100vh;
+		}
+		.left-column, .right-column {
+			height: 100%;
+		}
+  }
 }
