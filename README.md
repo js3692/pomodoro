@@ -1,5 +1,5 @@
 # Pomodoro
-The "Pomodoro" technique is based on the following <a href="http://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730">article</a>. 
+The "Pomodoro" technique is based on the following <a href="http://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730" target="top">article</a>. 
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ Open the application <a href="https://angular-pomodoro.herokuapp.com/" target="t
 ## Technologies
 ### Front-end
 
-The front-end is built with AngularJS and SCSS (compiled with gulp). Most of the design elements were created using the Angular UI Bootstrap package, and the timer is built with <a href="http://siddii.github.io/angular-timer/">angular-timer</a>. All of the data and the timer are organized into one page, and the user can organize individual tasks into separate inboxes.
+The front-end is built with AngularJS and SCSS (compiled with gulp). Most of the design elements were created using the Angular UI Bootstrap package, and the timer is built with <a href="http://siddii.github.io/angular-timer/" target="top">angular-timer</a>. All of the data and the timer are organized into one page, and the user can organize individual tasks into separate inboxes.
 
 ### Back-end
 
