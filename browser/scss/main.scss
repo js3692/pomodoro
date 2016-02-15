@@ -40,7 +40,6 @@ body {
   }
   .btn-success[disabled] {
     background-color: $success-light-shade;
-    // border-color: $success-light-shade;
     &:hover {
       border-color: $success;
       background-color: #fff;

@@ -6,7 +6,12 @@
 					<span><h2>Get things done with Pomodoro</h2></span>
 					<img src="/assets/pomodoro.png">
 				</div>
-				<div class="body row">
+				<div class="returning row" style="margin-top: 60px;" ng-hide="!returning">
+					<div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">
+						<button type="button" class="btn btn-success btn-block" ng-click="enter()">Enter</button>
+					</div>
+				</div>
+				<div class="body row" ng-hide="returning">
 					<form name="LoginForm" ng-submit="login(credentials)" class="form-horizontal" novalidate>
 						<div class="form-group">
 					  	<div class="col-sm-offset-1 col-sm-10 col-md-offset-0 col-md-12">

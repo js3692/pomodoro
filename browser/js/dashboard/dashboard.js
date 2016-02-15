@@ -44,7 +44,8 @@ app.controller('DashboardCtrl', [
 		'TaskSettings',
 		'AuthService',
 	function ($scope, $q, $timeout, $state, $compile, user, inboxes, tasks, InboxFactory, TaskFactory, InboxSettings, TaskSettings, AuthService) {
-  $scope.logout = function () {
+  $scope.logout = function (event) {
+  	event.stopPropagation();
     AuthService.logout().then(function () {
       $state.go('home');
     });
@@ -53,6 +54,7 @@ app.controller('DashboardCtrl', [
 	$scope.inboxes = inboxes;
 	$scope.tasks = tasks;
 	$scope.timerQueue = [];
+	$scope.timerRunning = false;
 
 	$scope.$watch('inboxes', function (newSet) {
     $scope.inboxes = newSet;
@@ -225,16 +227,14 @@ app.controller('DashboardCtrl', [
 			})
 	}
 
-	$scope.timerRunnig = false;
-	
 	$scope.startTimer = function () {
-		$scope.timerRunnig = true;
+		$scope.timerRunning = true;
 		var nextTimer = $scope.timerQueue.shift();
 		angular.element("div.time").append(nextTimer($scope))
 	}
 
 	$scope.cancelTimer = function () {
-		$scope.timerRunnig = false;
+		$scope.timerRunning = false;
 		angular.element("timer")[0].clear();
 		angular.element("timer").remove();
 		$scope.currentTask.pomodoros--;
@@ -256,7 +256,7 @@ app.controller('DashboardCtrl', [
 				angular.element("div.time").append(nextTimer($scope));
 			}, 1000)
 		} else {
-			$scope.timerRunnig = false;
+			$scope.timerRunning = false;
 			alert("Task Completed!")
 		}
 	}

@@ -3,7 +3,7 @@
 		<div class="row board">
 			<div class="col-sm-6 left-column">
 				<div class="row board-panel">
-					<div class="panel-container" ng-hide="!timerRunnig" style="background: none; background-color: white; position: absolute; top:10px; z-index: 10; padding: 15px; height: calc(100% - 20px); width: calc(100% - 20px); opacity: 0.8;"></div>
+					<div class="panel-container" ng-hide="!timerRunning" style="background: none; background-color: white; position: absolute; top:10px; z-index: 10; padding: 15px; height: calc(100% - 20px); width: calc(100% - 20px); opacity: 0.8;"></div>
 					<div class="panel-container">
 						<article ng-repeat="inbox in inboxes track by $index">
 							<div class="inbox-title" ng-click="isCollapsed = !isCollapsed">
@@ -32,6 +32,7 @@
 						<article>
 							<div class="inbox-title" ng-click="createInbox()">
 								<span class="glyphicon glyphicon-plus"></span>&nbsp;Create new inbox
+								<button type="button" class="btn btn-success" id="logout" ng-click="logout($event)">Log out</button>
 							</div>
 						</article>
 					</div>
@@ -42,17 +43,19 @@
 					<div class="panel-container timer">
 						<article>
 							<div class="timer-menu">
-								<span ng-hide="!currentTask.empty">Get things done with Pomodoro</span>
+								<span ng-hide="!timerRunning || timerQueue.length % 2 === 1">Work in progress...</span>
+								<span ng-hide="!timerRunning || timerQueue.length % 2 === 0">Take a break!</span>
 								<button type="button" class="btn btn-success" ng-disabled="!timerQueue.length" ng-click="startTimer()" ng-hide="currentTask.empty">Start</button>
-								<button type="button" class="btn btn-danger" ng-click="cancelTimer()" ng-hide="currentTask.empty">Cancel</button>
+								<button type="button" class="btn btn-danger" ng-disabled="!timerRunning" ng-click="cancelTimer()" ng-hide="currentTask.empty">Cancel</button>
 							</div>
 							<div class="time">
+								<img ng-src="/assets/pomodoro.png" ng-hide="timerRunning">
 							</div>
 						</article>
 					</div>
 				</div>
 				<div class="row board-panel">
-					<div class="panel-container" ng-hide="!timerRunnig" style="background: none; background-color: white; position: absolute; top:5px; z-index: 10; padding: 15px; height: calc(100% - 15px); width: calc(100% - 20px); opacity: 0.8;"></div>
+					<div class="panel-container" ng-hide="!timerRunning" style="background: none; background-color: white; position: absolute; top:5px; z-index: 10; padding: 15px; height: calc(100% - 15px); width: calc(100% - 20px); opacity: 0.8;"></div>
 					<div class="panel-container task-panel">
 						<article>
 							<div class="task-title">

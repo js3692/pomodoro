@@ -2,7 +2,18 @@ app.config(['$stateProvider', function ($stateProvider) {
 	$stateProvider.state('home', {
 		url: '/',
 		templateUrl: 'js/home/home.html',
-		controller: function (AuthService, $scope, $state) {
+		resolve: {
+      returning: function (AuthService) {
+        return AuthService.getLoggedInUser();
+      }
+    },
+		controller: function (returning, AuthService, $scope, $state) {
+			console.log(returning)
+			$scope.returning = returning;
+			$scope.enter = function () {
+				$state.go('dashboard');
+			}
+
 			$scope.loading = false;
 			$scope.error = null;
 
@@ -19,6 +30,8 @@ app.config(['$stateProvider', function ($stateProvider) {
 						$scope.error = err.message;
 					});
 			}
+
+
 		}
 	});
 }]);

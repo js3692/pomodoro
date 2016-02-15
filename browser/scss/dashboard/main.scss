@@ -63,6 +63,10 @@ section#dashboard {
 				}
 			}
 		}
+		article:last-child .inbox-title button {
+			right: 15px;
+			width: 130px;
+		}
 	}
 
 	.right-column {
@@ -170,9 +174,18 @@ section#dashboard {
 				color: white;
 				padding-left: 15px;
 				font-size: 1.6em;
-				text-align: center;
+				position: relative;
 				button {
+					position: absolute;
+					top: 50%;
+					transform: translateY(-50%);
 					width: 120px;
+				}
+				button:nth-child(3) {
+					right: 140px;
+				}
+				button:nth-child(4) {
+					right: 15px;
 				}
 			}
 			.time {
@@ -181,6 +194,13 @@ section#dashboard {
 				padding: 30px;
 				font-size: 5.5em;
 				position: relative;
+				img {
+					height: 100%;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+				}
 				timer {
 					position: absolute;
 					top: 50%;
