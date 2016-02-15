@@ -111,12 +111,12 @@ app.controller('DashboardCtrl', [
 	var arrangePomodoros = function (numberOfPomodoros) {
 		$scope.timerQueue = [];
 		while (numberOfPomodoros > 0) {
-			var five = $compile("<timer interval=\"1000\" countdown=\"5\" finish-callback=\"finished(false)\">{{ mminutes }}:{{ sseconds }}</timer>")
-			var three = $compile("<timer interval=\"1000\" countdown=\"3\" finish-callback=\"finished(true)\">{{ mminutes }}:{{ sseconds }}</timer>")
-			$scope.timerQueue.push(five, three)
-			// var fiveMinuteTimer = $compile("<timer interval=\"1000\" countdown=\"300\" finish-callback=\"finished()\">{{ mminutes }}:{{ sseconds }}</timer>");
-			// var twentyFiveMinuteTimer = $compile("<timer interval=\"1000\" countdown=\"1500\" finish-callback=\"finished()\">{{ mminutes }}:{{ sseconds }}</timer>")
-			// $scope.timerQueue.push(twentyFiveMinuteTimer, fiveMinuteTimer)
+			// var five = $compile("<timer interval=\"1000\" countdown=\"5\" finish-callback=\"finished(false)\">{{ mminutes }}:{{ sseconds }}</timer>");
+			// var three = $compile("<timer interval=\"1000\" countdown=\"3\" finish-callback=\"finished(true)\">{{ mminutes }}:{{ sseconds }}</timer>");
+			// $scope.timerQueue.push(five, three);
+			var fiveMinuteTimer = $compile("<timer interval=\"1000\" countdown=\"300\" finish-callback=\"finished()\">{{ mminutes }}:{{ sseconds }}</timer>");
+			var twentyFiveMinuteTimer = $compile("<timer interval=\"1000\" countdown=\"1500\" finish-callback=\"finished()\">{{ mminutes }}:{{ sseconds }}</timer>");
+			$scope.timerQueue.push(twentyFiveMinuteTimer, fiveMinuteTimer);
 			numberOfPomodoros--;
 		}
 		$scope.timerQueue.pop();
