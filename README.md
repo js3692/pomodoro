@@ -1,4 +1,4 @@
-# Pomodoro - a technique to get things done
+# Pomodoro
 
 ## Table of Contents
 
@@ -33,6 +33,7 @@ gulp testServerJS
 
 Given more time, I would have moved on to making front-end tests as well.
 
+<br>
 <hr>
 
-I hope you enjoy using the application. If you have any questions, pleaset feel free to ask me.
+I hope you enjoy using the application - if you have any questions, pleaset feel free to ask me!
