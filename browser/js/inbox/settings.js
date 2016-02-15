@@ -1,4 +1,4 @@
-app.service('InboxSettings', function ($uibModal) {
+app.service('InboxSettings', ['$uibModal', function ($uibModal) {
 
 	this.open = function (inboxId) {
 		return $uibModal.open({
@@ -32,4 +32,4 @@ app.service('InboxSettings', function ($uibModal) {
   	});
 
 	}
-});
+}]);
