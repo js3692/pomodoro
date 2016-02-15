@@ -1,8 +1,9 @@
 $success: #3182F0;
-$success-selected: #047693;
-$success-light-shade: #9bd8e7;
+$success-selected: #225ba8;
+$success-light-shade: #6ea7f4;
 $danger: #ef6144;
-$danger-selected: #eb3915;
+$danger-selected: #a7432f;
+$danger-light-shade: #f3907c;
 
 $tomato: #F04531;
 
@@ -22,7 +23,12 @@ body {
     height: 34px !important;
   }
 
-  .btn-success {
+  .open > .dropdown-toggle.btn-success:hover, .open > .dropdown-toggle.btn-success:focus {
+    background-color: $success-selected;
+    border-color: $success-selected;
+  }
+
+  .btn-success, .open > .dropdown-toggle.btn-success {
     background-color: $success;
     border-color: $success;
     &:hover, &:active, &:focus {
@@ -32,11 +38,12 @@ body {
     }
     &:active:focus {
       background-color: $success-selected;
+      border-color: $success-selected;
     }
     &:active:hover {
       background-color: $success-selected;
+      border-color: $success-selected;
     }
-
   }
   .btn-success[disabled] {
     background-color: $success-light-shade;
@@ -56,9 +63,19 @@ body {
     }
     &:active:focus {
       background-color: $danger-selected;
+      border-color: $danger-selected;
     }
     &:active:hover {
       background-color: $danger-selected;
+      border-color: $danger-selected;
+    }
+  }
+  .btn-danger[disabled] {
+    background-color: $danger-light-shade;
+    &:hover {
+      border-color: $danger;
+      background-color: #fff;
+      color: $danger;
     }
   }
   .btn-danger[disabled]:hover {
