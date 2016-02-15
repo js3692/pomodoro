@@ -30,14 +30,14 @@ var seedInboxes = function () {
 
 var tasks = [
 	{
-		title: "Find apartment",
+		title: "Finish problem set",
 		priority: "low",
-		notes: "Use craigslist",
+		notes: "Ch 1, 2, 3",
 		due: new Date(2016, 1, 15),
 	},
 	{
-		title: "Look up flights",
-		notes: "NYC to London",
+		title: "Start essay",
+		notes: "Choose topic and do outline",
 		due: new Date(2016, 1, 16),
 	},
 	{
