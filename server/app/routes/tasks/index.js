@@ -29,6 +29,7 @@ router.post('/', function (req, res, next) {
 
 router.get('/:taskId', function (req, res, next) {
 	Task.findById(req.params.taskId)
+		.populate('inbox')
 		.then(function (foundTask) {
 			res.json(foundTask);
 		})
