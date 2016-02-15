@@ -76,6 +76,9 @@ app.controller('DashboardCtrl', [
 				$scope.inboxes.filter(inbox => {
 					if(inbox._id === inboxId) inbox.title = updatedInboxTitle;
 				});
+				$scope.tasks.filter(task => {
+					if(task.inbox._id === inboxId) task.inbox.title = updatedInboxTitle;
+				})
 			}
 		});
 	}
