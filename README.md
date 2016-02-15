@@ -1,12 +1,13 @@
 # Pomodoro
+The "Pomodoro" technique is based on the following <a href="http://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730">article</a>. 
 
 ## Table of Contents
 
-- [Hosting](#hosting)
 - [Technologies Used](#technologies)
+- [Deployment](#deployment)
 - [Tests](#tests)
 
-## Hosting
+## Deployment
 
 ### Live!
 
@@ -15,24 +16,24 @@ Open the application <a href="https://angular-pomodoro.herokuapp.com/" target="t
 ## Technologies
 ### Front-end
 
-The front-end is built with AngularJS and SCSS (compiled with gulp). Most of the design elements were created using the Angular UI Bootstrap package, and the timer is built with "angular-timer".
-
-The "Pomodoro" technique is based on the following: <a href="http://lifehacker.com/productivity-101-a-primer-to-the-pomodoro-technique-1598992730">click here</a>. 
+The front-end is built with AngularJS and SCSS (compiled with gulp). Most of the design elements were created using the Angular UI Bootstrap package, and the timer is built with <a href="http://siddii.github.io/angular-timer/">angular-timer</a>. All of the data and the timer are organized into one page, and the user can organize individual tasks into separate inboxes.
 
 ### Back-end
 
-The back-end is built with Node.js and MongoDB. Given the limitations of time for this short-term project, I chose to use the most familiar technologies for the back-end, but I would've considered using other RDBMS-type databases such as SQLite, given the relationship between the "Inbox", "Task", and "User".
+The back-end is built with Node.js and MongoDB. Given the limitations of time for this short-term project, I chose to use technologies that are most familiar to me, but I would've considered using a simple RDBMS-type database like SQLite, given the relationship between the "Inbox", "Task", and "User" models.
 
 ## Tests
 
-Mosts tests are written Mocha.js-style. To run the test suite, run the following command:
+Tests are written for Mocha.js. To run the test suite, run the following commands:
 
+```bash
+npm install
+```
+
+then:
 ```bash
 gulp testServerJS
 ```
-
-Given more time, I would have moved on to making front-end tests as well.
-
 <br>
 <hr>
 
