@@ -23,8 +23,6 @@ app.controller('TaskSettingsCtrl', ['$scope', '$uibModalInstance', 'userId', 'ta
 	};
 	$scope.loading = false;
 
-	console.log(task, 'lksjdflksjdljflk');
-
 	$scope.close = $uibModalInstance.close;
 
 	$scope.update = function (newTask) {
